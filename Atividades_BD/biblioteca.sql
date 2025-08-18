@@ -1,6 +1,7 @@
-drop table if exists emprestimo_por_clientes cascade;
+drop table if exists emprestimo_por_livro cascade;
 drop table if exists livro_por_autor cascade;
 drop table if exists emprestimo cascade;
+drop table if exists cliente cascade;
 drop table if exists autor cascade;
 drop table if exists livro cascade;
 
@@ -47,4 +48,5 @@ create table if not exists emprestimo_por_livro (
 	foreign key(idemprestimo) references emprestimo(id),
 	foreign key(idlivro) references livro(id)
 );
+
 
