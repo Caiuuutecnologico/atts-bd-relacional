@@ -103,12 +103,12 @@ INSERT INTO Usuario (nome, email, senhaHash) VALUES
 INSERT INTO Evento (titulo, descricao, dataHora, status, idTipoEvento, idLocalizacao) VALUES
 ('Incêndio no centro', 'Fogo em prédio comercial', '2025-08-20', 'Ativo', 1, 1),
 ('Enchente na zona norte', 'Alagamento em vias principais', '2025-08-21', 'Resolvido', 2, 2),
-('Acidente grave', 'Colisão múltipla na rodovia', '2025-08-22', 'Em andamento', 3, 3);
+('Tornado', 'Colisão múltipla na rodovia', '2025-08-22', 'Em andamento', 3, 3);
 
 INSERT INTO Relato (texto, dataHora, idEvento, idUsuario) VALUES
 ('Vi muita fumaça subindo do prédio na Av. Paulista.', '2025-08-20', 1, 1),
 ('Água chegou até a altura da cintura em várias ruas.', '2025-08-21', 2, 2),
-('Trânsito totalmente parado, vários carros batidos.', '2025-08-22', 3, 3);
+('Trânsito totalmente parado, vários carros batidos devido ao tornado.', '2025-08-22', 3, 3);
 
 INSERT INTO Alerta (mensagem, dataHora, nivel, idEvento) VALUES
 ('Evitem a região central devido ao incêndio', '2025-08-20', 5, 1),
@@ -137,3 +137,25 @@ WHERE sigla_cidade = 'SPO';
 SELECT * FROM Usuario
 WHERE idUsuario > 1
 ORDER BY idUsuario DESC;
+
+--Aula 6
+CREATE TABLE IF NOT EXISTS Relato (
+idRelato SERIAL PRIMARY KEY,
+texto VARCHAR(500) NOT NULL,
+dataHora DATE NOT NULL,
+idEvento INT REFERENCES Evento (idEvento),
+idUsuario INT REFERENCES Usuario (idUsuario)
+);
+
+INSERT INTO relato (texto, dataHora, idEvento, idUsuario)
+VALUES
+('Vi três pessoas morrendo logo após o surgimento do tornado', '2025-08-22', 3, 2),
+('Água das torneiras contaminadas devido a enchente recente', '2025-08-21', 2, 1);
+
+SELECT * FROM relato
+ORDER BY dataHora ASC;
+
+SELECT * FROM evento
+ORDER BY dataHora ASC
+LIMIT 3;
+
